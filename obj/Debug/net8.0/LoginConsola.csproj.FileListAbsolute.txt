@@ -260,3 +260,4 @@ C:\Users\Edgar Lopez\Documents\VS\S2\P1 OO\T8 CRUD LOGIN\LoginConsola\obj\Debug\
 C:\Users\Edgar Lopez\Documents\VS\S2\P1 OO\T8 CRUD LOGIN\LoginConsola\obj\Debug\net8.0\LoginConsola.pdb
 C:\Users\Edgar Lopez\Documents\VS\S2\P1 OO\T8 CRUD LOGIN\LoginConsola\obj\Debug\net8.0\LoginConsola.genruntimeconfig.cache
 C:\Users\Edgar Lopez\Documents\VS\S2\P1 OO\T8 CRUD LOGIN\LoginConsola\obj\Debug\net8.0\ref\LoginConsola.dll
+C:\Users\Edgar Lopez\Documents\VS\S2\P1 OO\T8 CRUD LOGIN\LoginConsola\obj\Debug\net8.0\LoginConsola.sourcelink.json

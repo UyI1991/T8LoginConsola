@@ -59,7 +59,8 @@ while (true)
     Console.WriteLine("3. Buscar usuario por ID");
     Console.WriteLine("4. Actualizar usuario");
     Console.WriteLine("5. Eliminar usuario");
-    Console.WriteLine("6. Salir");
+    Console.WriteLine("6. Iniciar sesión");
+    Console.WriteLine("7. Salir");
 
     Console.Write("\nSeleccione una opción: ");
     string? opcion = Console.ReadLine();
@@ -99,6 +100,12 @@ while (true)
                 break;
 
             case "6":
+                Login();
+                Console.ReadKey(true);
+                Console.WriteLine();
+                break;
+
+            case "7":
                 Console.WriteLine("Saliendo del sistema...");
                 return;
 
@@ -305,4 +312,52 @@ void Eliminar()
     Console.ForegroundColor = ConsoleColor.Green;
     Console.WriteLine("Usuario eliminado correctamente.");
     Console.ResetColor();
+}
+
+// 9. LOGIN - INICIAR SESIÓN
+
+void Login()
+{
+    using var db = new LoginContext(opciones);
+
+    Console.Write("\nIngrese nickname: ");
+    string nickname = Console.ReadLine()?.Trim() ?? "";
+
+    Console.Write("Ingrese contraseña: ");
+    string password = Console.ReadLine() ?? "";
+
+    var usuario = db.Usuarios
+        .AsNoTracking()
+        .FirstOrDefault(u => u.Nickname == nickname);
+
+    bool valido = false;
+
+    if (usuario != null &&
+        usuario.Contrasena.StartsWith("$2"))
+    {
+        try
+        {
+            valido = BCrypt.Net.BCrypt.Verify(
+                password,
+                usuario.Contrasena);
+        }
+        catch (BCrypt.Net.SaltParseException)
+        {
+            valido = false;
+        }
+    }
+
+    if (valido)
+    {
+        Console.ForegroundColor = ConsoleColor.Green;
+        Console.WriteLine("\nINICIO DE SESIÓN EXITOSO");
+        Console.WriteLine($"Bienvenido, {usuario!.Nickname}");
+        Console.ResetColor();
+    }
+    else
+    {
+        Console.ForegroundColor = ConsoleColor.Red;
+        Console.WriteLine("Usuario o contraseña incorrectos.");
+        Console.ResetColor();
+    }
 }
